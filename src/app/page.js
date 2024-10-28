@@ -232,7 +232,7 @@ export default function Home() {
         </div>
         {/* Discord Image with orange glow */}
         <div className="hidden md:block ml-8 relative">
-          <img
+          <Image
             src="/discord.png"
             alt="Discord"
             className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
@@ -245,7 +245,7 @@ export default function Home() {
             <section className="px-8 py-12 text-white mt-12 flex items-center justify-between">
         {/* Stream Image with opposing perspective */}
         <div className="hidden md:block mr-8 relative">
-          <img
+          <Image
             src="/stream.png"
             alt="DLive Stream"
             className="rounded-lg transform perspective-1000 -rotate-6 shadow-lg"
@@ -279,7 +279,7 @@ export default function Home() {
           <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
         </a>
         <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-          <img 
+          <Image 
             src="/dlive.png" 
             alt="DLive" 
             className="w-8 h-8" // Ajustez la taille ici
@@ -325,7 +325,7 @@ export default function Home() {
       </button>
 
       {/* Logo */}
-      <img
+      <Image
         src={popupContent.logo}
         alt={`${popupContent.name} Logo`}
         className="mx-auto mb-4"

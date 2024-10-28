@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import Image from 'next/image';
+
 
 library.add(faYoutube, faInstagram);
 
@@ -249,7 +251,7 @@ export default function Hunt() {
           <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
         </a>
         <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-          <img 
+         <Image
             src="/dlive.png" 
             alt="DLive" 
             className="w-8 h-8" // Ajustez la taille ici
