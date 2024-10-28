@@ -114,4 +114,4 @@ export default function Blackjack() {
       </footer>
     </div>
   );
-}²
+}
