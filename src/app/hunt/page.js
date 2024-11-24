@@ -77,7 +77,6 @@ export default function Hunt() {
               <ul className="space-y-4 text-white">
                 <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
                 <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-                <li className="hover:text-yellow-400"><a href="/slots">Machines à sous</a></li>
               </ul>
             </nav>
           )}
@@ -251,11 +250,13 @@ export default function Hunt() {
           <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
         </a>
         <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-         <Image
+          <Image 
             src="/dlive.png" 
             alt="DLive" 
-            className="w-8 h-8" // Ajustez la taille ici
-            style={{ filter: 'brightness(0) saturate(100%) invert(60%) sepia(96%) saturate(731%) hue-rotate(358deg) brightness(95%) contrast(93%)' }}
+            width={30}
+      height={18}
+      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
+    
           />
         </a>
         <a href="https://www.instagram.com/LesZ_ours" className="text-[#F7971D] hover:text-white">

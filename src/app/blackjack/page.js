@@ -1,12 +1,11 @@
 "use client";
 
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { useState } from 'react';
-import Image from 'next/image';
-
 
 library.add(faYoutube, faInstagram);
 
@@ -29,7 +28,6 @@ export default function Blackjack() {
               <ul className="space-y-4 text-white">
                 <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
                 <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-                <li className="hover:text-yellow-400"><a href="/slots">Machines à sous</a></li>
               </ul>
             </nav>
           )}
@@ -64,54 +62,59 @@ export default function Blackjack() {
         {/* Blackjack Strategy Table Image */}
         <div className="flex justify-center">
         <Image
-            src="/bj.png" 
-            alt="Tableau de Stratégie Blackjack" 
-            className="max-w-full h-auto shadow-lg rounded-lg" 
-          />
+  src="/bj.png"
+  alt="Tableau de Stratégie Blackjack"
+  width={600} // Largeur en pixels
+  height={400} // Hauteur en pixels
+  className="max-w-full h-auto shadow-lg rounded-lg"
+/>
+
         </div>
       </main>
 
       {/* Footer */}
       <footer className="bg-[#1b1b1b] py-8 px-8 mt-12 relative">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-bold text-white mb-4">Suivez-nous sur</h3>
-            <div className="flex space-x-4">
-              <a href="https://www.youtube.com/@LesZ_oursOff" className="text-[#FF9900] hover:text-white">
-                <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
-              </a>
-              <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-              <Image
-                  src="/dlive.png" 
-                  alt="DLive" 
-                  className="w-8 h-8"
-                  style={{ filter: 'brightness(0) saturate(100%) invert(60%) sepia(96%) saturate(731%) hue-rotate(358deg) brightness(95%) contrast(93%)' }}
-                />
-              </a>
-              <a href="https://www.instagram.com/LesZ_ours" className="text-[#FF9900] hover:text-white">
-                <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
-              </a>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-white mb-4">Légal</h3>
-            <div className="flex flex-col space-y-2">
-              <a href="/condition" className="text-gray-400 hover:text-white">Conditions Générales</a>
-              <a href="/confidentialite" className="text-gray-400 hover:text-white">Politique de Confidentialité</a>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-white mb-4">Paramètres</h3>
-            <div className="flex flex-col space-y-2">
-              <a href="/login" className="text-gray-400 hover:text-white">Paramètres du Profil</a>
-              <a href="/login" className="text-gray-400 hover:text-white">Paramètres du Compte</a>
-            </div>
-          </div>
-        </div>
-        <div className="text-center text-gray-400 mt-8">
-          &copy; 2024 CasinoHub. Tous droits réservés.
-        </div>
-      </footer>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Suivez-nous sur</h3>
+      <div className="flex space-x-4">
+        <a href="https://www.youtube.com/@LesZ_oursOff" className="text-[#F7971D] hover:text-white">
+          <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
+        </a>
+        <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
+          <Image 
+            src="/dlive.png" 
+            alt="DLive" 
+            width={30}
+      height={18}
+      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
+    
+          />
+        </a>
+        <a href="https://www.instagram.com/LesZ_ours" className="text-[#F7971D] hover:text-white">
+          <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
+        </a>
+      </div>
+    </div>
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Légal</h3>
+      <div className="flex flex-col space-y-2">
+        <a href="/condition" className="text-gray-400 hover:text-white">Conditions Générales</a>
+        <a href="/confidentialite" className="text-gray-400 hover:text-white">Politique de Confidentialité</a>
+      </div>
+    </div>
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Paramètres</h3>
+      <div className="flex flex-col space-y-2">
+        <a href="/login" className="text-gray-400 hover:text-white">Paramètres du Profil</a>
+        <a href="/login" className="text-gray-400 hover:text-white">Paramètres du Compte</a>
+      </div>
+    </div>
+  </div>
+  <div className="text-center text-gray-400 mt-8">
+    &copy; 2024 CasinoHub. Tous droits réservés.
+  </div>
+</footer>
     </div>
   );
 }

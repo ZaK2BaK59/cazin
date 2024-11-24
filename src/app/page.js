@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -114,7 +115,7 @@ export default function Home() {
               <ul className="space-y-4 text-white">
                 <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
                 <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-                <li className="hover:text-yellow-400"><a href="/slots">Machines à sous</a></li>
+                
               </ul>
             </nav>
           )}
@@ -232,12 +233,13 @@ export default function Home() {
         </div>
         {/* Discord Image with orange glow */}
         <div className="hidden md:block ml-8 relative">
-          <Image
-            src="/discord.png"
-            alt="Discord"
-            className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
-            style={{ width: '500px', height: 'auto'}}
-          />
+        <Image
+      src="/discord.png"
+      alt="Discord"
+      width={500}
+      height={300}
+      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
+    />
         </div>
       </section>
 
@@ -248,9 +250,10 @@ export default function Home() {
           <Image
             src="/stream.png"
             alt="DLive Stream"
-            className="rounded-lg transform perspective-1000 -rotate-6 shadow-lg"
-            style={{ width: '500px', height: 'auto' }}
-          />
+            width={500}
+      height={300}
+      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
+    />
         </div>
         
         <div className="flex flex-col items-start">
@@ -282,8 +285,10 @@ export default function Home() {
           <Image 
             src="/dlive.png" 
             alt="DLive" 
-            className="w-8 h-8" // Ajustez la taille ici
-            style={{ filter: 'brightness(0) saturate(100%) invert(60%) sepia(96%) saturate(731%) hue-rotate(358deg) brightness(95%) contrast(93%)' }}
+            width={30}
+      height={18}
+      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
+    
           />
         </a>
         <a href="https://www.instagram.com/LesZ_ours" className="text-[#F7971D] hover:text-white">

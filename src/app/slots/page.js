@@ -29,7 +29,6 @@ export default function Slots() {
               <ul className="space-y-4 text-white">
                 <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
                 <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-                <li className="hover:text-yellow-400"><a href="/slots">Machines à sous</a></li>
               </ul>
             </nav>
           )}
