@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faSignInAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faSignInAlt, faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faYoutube, faInstagram);
 
 library.add(faYoutube, faInstagram);
 
@@ -18,6 +20,12 @@ export default function Hunt() {
   const [betAmount, setBetAmount] = useState('');
   const [winAmount, setWinAmount] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Fonction pour toggler l'état du menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   // Ajouter une machine
   const addMachine = () => {
@@ -81,24 +89,26 @@ export default function Hunt() {
   return (
     <div className="bg-black min-h-screen text-white flex flex-col justify-between">
       {/* Header */}
-      <header className="flex items-center justify-between px-8 py-4 bg-[#1b1b1b]">
-        <nav className="flex items-center space-x-6">
-        <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Accueil
-          </a>
-          <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Blackjack
-          </a>
-          <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Hunt
-          </a>
-        </nav>
+      <header className="bg-[#1b1b1b] text-white px-4 py-4 pb-0 shadow-md">
+      <div className="flex items-center justify-between">
+        {/* Menu burger (visible uniquement sur mobile) */}
+        <button
+          className="md:hidden text-[#F7971D] text-3xl"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </button>
+
+        {/* Logo centré sur tous les écrans */}
         <div className="flex-grow flex justify-center">
           <a href="/" className="flex items-center space-x-2">
             <span className="text-white text-3xl font-bold">Casino</span>
             <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">Hub</div>
           </a>
         </div>
+
+        {/* Icônes connexion (toujours visible à droite) */}
         <div className="flex items-center space-x-4">
           <a href="/login" className="text-[#F7971D]">
             <FontAwesomeIcon icon={faUserCircle} className="text-3xl" />
@@ -107,7 +117,53 @@ export default function Hunt() {
             <FontAwesomeIcon icon={faSignInAlt} className="text-3xl" />
           </a>
         </div>
-      </header>
+      </div>
+
+      {/* Menu de navigation (visible uniquement sur desktop ou quand le menu est ouvert sur mobile) */}
+      <nav
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } mt-4 md:mt-0 md:flex md:items-center md:space-x-6`}
+      >
+        {/* Mobile : affichage vertical */}
+        <div className="md:hidden flex flex-col items-center space-y-4">
+          <a
+            href="/"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Accueil
+          </a>
+          <a
+            href="/hunt"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Hunt
+          </a>
+          <a
+            href="/blackjack"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Blackjack
+          </a>
+        </div>
+
+        {/* Desktop : affichage horizontal */}
+        <div className="hidden md:flex items-center space-x-6 relative bottom-[2.0rem]">
+  <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Accueil
+  </a>
+  <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Hunt
+  </a>
+  <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Blackjack
+  </a>
+</div>
+      </nav>
+    </header>
 
       {/* Main Content */}
       <main className="px-8 py-12">
@@ -184,71 +240,74 @@ export default function Hunt() {
           </button>
         </div>
 
-        {/* Bonus Hunt Table */}
-        <h3 className="text-3xl font-bold mb-4">Tableau des Machines</h3>
-        <table className="min-w-full bg-gray-800 rounded-lg">
-          <thead>
-            <tr>
-              <th className="text-left px-4 py-2">Machine</th>
-              <th className="text-left px-4 py-2">Provider</th>
-              <th className="text-right px-4 py-2">Mise (€)</th>
-              <th className="text-right px-4 py-2">Gain (€)</th>
-              <th className="text-right px-4 py-2">Multiplicateur</th>
-              <th className="text-center px-4 py-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {machines.map((machine, index) => (
-              <tr key={index} className="bg-gray-700 border-b border-gray-600">
-                <td className="px-4 py-2">{machine.machineName}</td>
-                <td className="px-4 py-2">{machine.provider}</td>
-                <td className="px-4 py-2 text-right">{machine.betAmount.toFixed(2)}</td>
-                <td className={`px-4 py-2 text-right ${getColorClass(machine.multiplier)}`}>
-                  {machine.winAmount !== null ? (
-                    machine.winAmount.toFixed(2)
-                  ) : (
-                    <>
-                      {editingIndex === index ? (
-                        <input
-                          type="number"
-                          value={winAmount}
-                          onChange={(e) => setWinAmount(e.target.value)}
-                          className="px-2 py-1 bg-gray-800 text-white rounded"
-                        />
-                      ) : (
-                        <button
-                          onClick={() => setEditingIndex(index)}
-                          className="text-yellow-400"
-                        >
-                          Ajouter gain
-                        </button>
-                      )}
-                      {editingIndex === index && (
-                        <button
-                          onClick={() => addWinAmount(index)}
-                          className="ml-2 text-green-500"
-                        >
-                          Confirmer
-                        </button>
-                      )}
-                    </>
-                  )}
-                </td>
-                <td className="px-4 py-2 text-right">
-  {machine.multiplier !== null ? machine.multiplier.toFixed(2) : 'N/A'}
-</td>
-<td className="px-4 py-2 text-center">
-  <button
-    onClick={() => removeMachine(index)}
-    className="px-2 py-1 bg-red-500 text-white rounded-lg"
-  >
-    Supprimer
-  </button>
-</td>
-</tr>
-))}
-</tbody>
-</table>
+     {/* Bonus Hunt Table */}
+<h3 className="text-3xl font-bold mb-4">Tableau des Machines</h3>
+<div className="overflow-x-auto">
+  <table className="min-w-full bg-gray-800 rounded-lg">
+    <thead>
+      <tr>
+        <th className="text-left px-4 py-2">Machine</th>
+        <th className="text-left px-4 py-2">Provider</th>
+        <th className="text-right px-4 py-2">Mise (€)</th>
+        <th className="text-right px-4 py-2">Gain (€)</th>
+        <th className="text-right px-4 py-2">Multiplicateur</th>
+        <th className="text-center px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {machines.map((machine, index) => (
+        <tr key={index} className="bg-gray-700 border-b border-gray-600">
+          <td className="px-4 py-2">{machine.machineName}</td>
+          <td className="px-4 py-2">{machine.provider}</td>
+          <td className="px-4 py-2 text-right">{machine.betAmount.toFixed(2)}</td>
+          <td className={`px-4 py-2 text-right ${getColorClass(machine.multiplier)}`}>
+            {machine.winAmount !== null ? (
+              machine.winAmount.toFixed(2)
+            ) : (
+              <>
+                {editingIndex === index ? (
+                  <input
+                    type="number"
+                    value={winAmount}
+                    onChange={(e) => setWinAmount(e.target.value)}
+                    className="px-2 py-1 bg-gray-800 text-white rounded"
+                  />
+                ) : (
+                  <button
+                    onClick={() => setEditingIndex(index)}
+                    className="text-yellow-400"
+                  >
+                    Ajouter gain
+                  </button>
+                )}
+                {editingIndex === index && (
+                  <button
+                    onClick={() => addWinAmount(index)}
+                    className="ml-2 text-green-500"
+                  >
+                    Confirmer
+                  </button>
+                )}
+              </>
+            )}
+          </td>
+          <td className="px-4 py-2 text-right">
+            {machine.multiplier !== null ? machine.multiplier.toFixed(2) : 'N/A'}
+          </td>
+          <td className="px-4 py-2 text-center">
+            <button
+              onClick={() => removeMachine(index)}
+              className="px-2 py-1 bg-red-500 text-white rounded-lg"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 
 {/* Bouton pour vider le tableau */}
 <div className="flex justify-end mt-4">

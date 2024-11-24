@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faSignInAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faSignInAlt, faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -12,27 +12,34 @@ library.add(faYoutube, faInstagram);
 export default function LoginPage() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Fonction pour toggler l'état du menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div className="min-h-screen bg-black flex flex-col justify-between">
       {/* Header with only the logo */}
-      <header className="flex items-center justify-between px-8 py-4 bg-[#1b1b1b]">
-        <nav className="flex items-center space-x-6">
-        <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Accueil
-          </a>
-          <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Blackjack
-          </a>
-          <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
-            Hunt
-          </a>
-        </nav>
+      <header className="bg-[#1b1b1b] text-white px-4 py-4 pb-0 shadow-md">
+      <div className="flex items-center justify-between">
+        {/* Menu burger (visible uniquement sur mobile) */}
+        <button
+          className="md:hidden text-[#F7971D] text-3xl"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+        </button>
+
+        {/* Logo centré sur tous les écrans */}
         <div className="flex-grow flex justify-center">
           <a href="/" className="flex items-center space-x-2">
             <span className="text-white text-3xl font-bold">Casino</span>
             <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">Hub</div>
           </a>
         </div>
+
+        {/* Icônes connexion (toujours visible à droite) */}
         <div className="flex items-center space-x-4">
           <a href="/login" className="text-[#F7971D]">
             <FontAwesomeIcon icon={faUserCircle} className="text-3xl" />
@@ -41,7 +48,53 @@ export default function LoginPage() {
             <FontAwesomeIcon icon={faSignInAlt} className="text-3xl" />
           </a>
         </div>
-      </header>
+      </div>
+
+      {/* Menu de navigation (visible uniquement sur desktop ou quand le menu est ouvert sur mobile) */}
+      <nav
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } mt-4 md:mt-0 md:flex md:items-center md:space-x-6`}
+      >
+        {/* Mobile : affichage vertical */}
+        <div className="md:hidden flex flex-col items-center space-y-4">
+          <a
+            href="/"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Accueil
+          </a>
+          <a
+            href="/hunt"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Hunt
+          </a>
+          <a
+            href="/blackjack"
+            className="text-[#F7971D] text-lg font-bold hover:text-yellow-400"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Blackjack
+          </a>
+        </div>
+
+        {/* Desktop : affichage horizontal */}
+        <div className="hidden md:flex items-center space-x-6 relative bottom-[2.0rem]">
+  <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Accueil
+  </a>
+  <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Hunt
+  </a>
+  <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+    Blackjack
+  </a>
+</div>
+      </nav>
+    </header>
       {/* Login Form */}
       <div className="flex flex-col justify-center items-center flex-grow">
         <div className="bg-[#1b1b1b] p-8 rounded-lg shadow-lg w-96">
