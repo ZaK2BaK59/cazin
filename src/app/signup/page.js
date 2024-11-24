@@ -17,31 +17,23 @@ export default function Signup() {
     <div className="bg-black min-h-screen text-white flex flex-col justify-between">
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 bg-[#1b1b1b]">
-        <div className="flex items-center space-x-4">
-          <button
-            className="text-[#F7971D] text-2xl cursor-pointer"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            &#9776;
-          </button>
-          {isMenuOpen && (
-            <nav className="absolute top-16 left-0 bg-[#1b1b1b] p-4 z-50 shadow-lg">
-              <ul className="space-y-4 text-white">
-                <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
-                <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>              </ul>
-            </nav>
-          )}
-        </div>
-
+        <nav className="flex items-center space-x-6">
+        <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Accueil
+          </a>
+          <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Blackjack
+          </a>
+          <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Hunt
+          </a>
+        </nav>
         <div className="flex-grow flex justify-center">
           <a href="/" className="flex items-center space-x-2">
             <span className="text-white text-3xl font-bold">Casino</span>
-            <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">
-              Hub
-            </div>
+            <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">Hub</div>
           </a>
         </div>
-
         <div className="flex items-center space-x-4">
           <a href="/login" className="text-[#F7971D]">
             <FontAwesomeIcon icon={faUserCircle} className="text-3xl" />

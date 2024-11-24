@@ -1,17 +1,15 @@
 "use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import Image from "next/image";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle, faSignInAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faYoutube, faInstagram);
 
-
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({});
 
@@ -27,36 +25,28 @@ export default function Home() {
     {
       name: "Instant Casino",
       logo: "/instant.png",
-      bonuses: [
-        "60 tours gratuits sur le bandit",
-        "Retrait instantané",
-      ],
-      description: "Déposez 50€ et vous aurez accès à 60 tours gratuits sur le bandit. Retrait instantané en moins d'une heure, sans aucune condition de mise. Profitez d'un support client 24/24 et de 10% de cashback chaque semaine.",
+      bonuses: ["60 tours gratuits sur le bandit", "Retrait instantané"],
+      description:
+        "Déposez 50€ et vous aurez accès à 60 tours gratuits sur le bandit. Retrait instantané en moins d'une heure, sans aucune condition de mise. Profitez d'un support client 24/24 et de 10% de cashback chaque semaine.",
       paymentMethods: ["Cryptomonnaies", "Carte bancaire", "Virement bancaire"],
       color: "from-[#42445A] via-[#42445A] to-[#42445A]",
-      url: "https://record.instantcasinoaffiliates.com/_vzUztB3jJhsd2bMnnkYwymNd7ZgqdRLk/1/", 
+      url: "https://record.instantcasinoaffiliates.com/_vzUztB3jJhsd2bMnnkYwymNd7ZgqdRLk/1/",
     },
     {
       name: "Kryptozino",
-      logo: "/krypto.png", // Assure-toi que ce logo existe dans ton dossier public
-      bonuses: [
-        "100 % jusqu'à 1 000 $",
-        "Retrait instantané",
-      ],
-      description: "Effectuez votre premier dépôt et réclamez un bonus de 100 % jusqu'à 1 000 $ avec un wager x30. Le dépôt minimum est de 20 $, et vous bénéficiez d'un retrait instantané. De plus, profitez de 60 tours gratuits sur le bandit, avec un support client 24/24 et un cashback de 10 % chaque semaine.",
+      logo: "/krypto.png",
+      bonuses: ["100 % jusqu'à 1 000 $", "Retrait instantané"],
+      description:
+        "Effectuez votre premier dépôt et réclamez un bonus de 100 % jusqu'à 1 000 $ avec un wager x30. Le dépôt minimum est de 20 $, et vous bénéficiez d'un retrait instantané. De plus, profitez de 60 tours gratuits sur le bandit, avec un support client 24/24 et un cashback de 10 % chaque semaine.",
       paymentMethods: ["Cryptomonnaies", "Carte bancaire", "Virement bancaire", "Apple Pay", "Google Pay", "Cashlib"],
       color: "from-[#3C347A] via-[#3C347A] to-[#3C347A]",
-      url: "https://kryptosino555.com/?a_aid=LesZ_ours", 
+      url: "https://kryptosino555.com/?a_aid=LesZ_ours",
     },
     {
       name: "CrazyBet",
-      logo: "/crazy.png", // Assure-toi que le logo est disponible dans le dossier public
-      bonuses: [
-        "200 % WAGER x40",
-        "Retrait instantané",
-      ],
-      description: `Le Bonus sur CrazyBet est un 200 % (Exemple : Je dépose 1000 €, le casino me rajoute 2000 € et je joue avec 3000 €).
-                    \n\n⚠️ Pour activer le 200 %, tu dois être inscrit en cliquant ici.`,
+      logo: "/crazy.png",
+      bonuses: ["200 % WAGER x40", "Retrait instantané"],
+      description: `Le Bonus sur CrazyBet est un 200 % (Exemple : Je dépose 1000 €, le casino me rajoute 2000 € et je joue avec 3000 €).`,
       details: [
         "KYC Niveau 2 Obligatoire (CNI avec Selfie)",
         "Dépôt Mini : 50 € / Max : 2000 €",
@@ -67,71 +57,60 @@ export default function Home() {
         "Bonus hunt autorisé mais attention à ne pas tomber en dessous de 1 €, sinon le bonus sera automatiquement annulé !",
         "VPN autorisé",
         "Liste de slots bannis pour ce wager",
-        "Vous avez 7 jours pour compléter le wager une fois activé."
+        "Vous avez 7 jours pour compléter le wager une fois activé.",
       ],
       paymentMethods: ["Cryptomonnaies", "Carte bancaire", "Virement bancaire"],
-      color: "from-[#6A00FF] via-[#6A00FF] to-[#4E00FF]", // Dégradé personnalisé pour CrazyBet
-      url: "https://crazybet.com/?modal=signUp&r=LesZ_ours" // Remplace avec l'URL correcte
+      color: "from-[#6A00FF] via-[#6A00FF] to-[#4E00FF]",
+      url: "https://crazybet.com/?modal=signUp&r=LesZ_ours",
     },
     {
       name: "FC Moon",
-      logo: "/moon.png", // Assure-toi que le logo est bien dans ton dossier public
-      bonuses: [
-        "100 % jusqu'à 1000€",
-        "Wager aléatoire x10 à x40",
-      ],
-      description: `Offre de bienvenue de 100 % avec un wager aléatoire qui peut aller de x10 jusqu'à x40, avec ou sans conditions. 
-                    \n\nDépôt minimum de 20 €. Le bonus de bienvenue expire après 24 heures. Profitez du support client 24/24 et des dépôts et retraits instantanés en fiat ou en cryptomonnaies.`,
+      logo: "/moon.png",
+      bonuses: ["100 % jusqu'à 1000€", "Wager aléatoire x10 à x40"],
+      description: `Offre de bienvenue de 100 % avec un wager aléatoire qui peut aller de x10 jusqu'à x40.`,
       details: [
         "VPN autorisé",
         "Bonus hunt autorisé",
         "Dépôt et retrait instantané en fiat ou en cryptomonnaies",
         "Support client 24/24",
-        "Machine à sous et jeux en direct",
         "Le bonus de bienvenue expire après 24 heures",
-        "Bien rentrer le code promotionnel « lesz_ours » après avoir cliqué sur le lien"
       ],
       paymentMethods: ["Cryptomonnaies", "Carte bancaire", "Virement bancaire"],
-      color: "from-[#2E2C3C] via-[#2E2C3C] to-[#2E2C3C]", // Dégradé sombre personnalisé
-      url: "https://bit.ly/4d0Wfmy" // URL à remplacer avec la bonne
-    }    
-    
+      color: "from-[#2E2C3C] via-[#2E2C3C] to-[#2E2C3C]",
+      url: "https://bit.ly/4d0Wfmy",
+    },
+    {
+      name: "SpinRollz",
+      logo: "/rollz.png",
+      bonuses: ["100% WAGER x35", "Max bet 5€"],
+      description: `- Wager x35\n- Mise maximale : 5€\n- Achat de bonus interdit\n- VPN autorisé\n- Dépôt en cryptomonnaies et cartes bancaires\n- Dépôt minimum : 20€\n- Dépôt maximum : 500€`,
+      paymentMethods: ["Cryptomonnaies", "Carte bancaire"],
+      color: "from-[#4A4A77] via-[#2C2C5C] to-[#1E1E47]", // Couleurs inspirées de SpinRollz
+      url: "https://track.affilirise.com/visit/?bta=656232&nci=5523&utm_campaign=LesZ_ours",
+    },
   ];
 
   return (
     <div className="bg-black min-h-screen text-white flex flex-col justify-between">
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 bg-[#1b1b1b]">
-        {/* Left Section - Hamburger Menu */}
-        <div className="flex items-center space-x-4">
-          <button
-            className="text-[#F7971D] text-2xl cursor-pointer"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            &#9776; {/* Hamburger Icon */}
-          </button>
-          {isMenuOpen && (
-            <nav className="absolute top-16 left-0 bg-[#1b1b1b] p-4 z-50 shadow-lg">
-              <ul className="space-y-4 text-white">
-                <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
-                <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-                
-              </ul>
-            </nav>
-          )}
-        </div>
-
-        {/* Center Section - Logo */}
+        <nav className="flex items-center space-x-6">
+        <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Accueil
+          </a>
+          <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Blackjack
+          </a>
+          <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Hunt
+          </a>
+        </nav>
         <div className="flex-grow flex justify-center">
-          <div className="flex items-center space-x-2">
+          <a href="/" className="flex items-center space-x-2">
             <span className="text-white text-3xl font-bold">Casino</span>
-            <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">
-              Hub
-            </div>
-          </div>
+            <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">Hub</div>
+          </a>
         </div>
-
-        {/* Right Section - Profile Icons */}
         <div className="flex items-center space-x-4">
           <a href="/login" className="text-[#F7971D]">
             <FontAwesomeIcon icon={faUserCircle} className="text-3xl" />
@@ -145,77 +124,39 @@ export default function Home() {
       {/* Main Content */}
       <main className="px-8 py-12">
         <h2 className="text-4xl font-bold text-center mb-8">Offres Partenaires</h2>
-        <p className="text-center text-gray-400 mb-12">
-          Trouvez les meilleures offres exclusives de nos partenaires.
-        </p>
-
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Casino Cards with radial gradients */}
-          {casinos.slice(0, 2).map((casino, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {casinos.map((casino, index) => (
             <div
               key={index}
-              className={`lg:col-span-1 bg-gradient-to-br ${casino.color} p-6 rounded-lg shadow-md`}
+              className={`relative bg-gradient-to-br ${casino.color} p-6 rounded-lg shadow-md`}
             >
+              {/* Logo spécifique dans le coin supérieur droit */}
+              <div className="absolute top-2 right-2">
+                <Image src={casino.logo} alt={casino.name} width={80} height={80} className="rounded-full" />
+              </div>
               <h3 className="text-xl font-bold text-white">{casino.name}</h3>
               <p className="mt-2 text-3xl font-bold text-white">{casino.bonuses[0]}</p>
-              <p className="mt-2 text-gray-200">{casino.bonuses[1]}</p>
               <div className="flex justify-between items-center mt-4">
-                <button onClick={() => togglePopup(casino)} className="text-gray-200">En savoir plus</button>
-                
-                {/* Lien vers le casino pour "Réclamer" */}
+                <button onClick={() => togglePopup(casino)} className="text-gray-200">
+                  En savoir plus
+                </button>
                 <a href={casino.url} target="_blank" rel="noopener noreferrer">
-                  <button className="px-4 py-2 bg-[#F7971D] text-black rounded-lg">
-                    Réclamer
-                  </button>
+                  <button className="px-4 py-2 bg-[#F7971D] text-black rounded-lg">Réclamer</button>
                 </a>
               </div>
             </div>
           ))}
-        </div>
 
-        {/* One Casino and Two Emplacements libres */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          {/* Third Casino (First Emplacement) */}
-          <div
-            className={`bg-gradient-to-br ${casinos[2].color} p-6 rounded-lg shadow-md hover: transition-all duration-300 ease-in-out`}
-          >
-            <h3 className="text-xl font-bold text-white">{casinos[2].name}</h3>
-            <p className="mt-2 text-3xl font-bold text-white">{casinos[2].bonuses[0]}</p>
-            <p className="mt-2 text-gray-200">{casinos[2].wager}</p>
-            <div className="flex justify-between items-center mt-4">
-              <button onClick={() => togglePopup(casinos[2])} className="text-gray-200">En savoir plus</button>
-              
-              {/* Lien vers le casino pour "Réclamer" */}
-              <a href={casinos[2].url} target="_blank" rel="noopener noreferrer">
-                <button className="px-4 py-2 bg-[#F7971D] text-black rounded-lg">
-                  Réclamer
-                </button>
-              </a>
+          {/* Emplacements vides */}
+          {[...Array(1)].map((_, i) => (
+            <div
+              key={`empty-${i}`}
+              className="bg-gray-500 p-6 rounded-lg flex items-center justify-center"
+            >
+              <h3 className="text-xl font-bold text-gray-300"></h3>
+              <p className="text-gray-400">Partenariat disponible, Merci de nous contacter</p>
             </div>
-          </div>
-  {/* FC Moon (Second Emplacement) */}
-  <div
-    className={`bg-gradient-to-br ${casinos[3].color} p-6 rounded-lg shadow-md hover: transition-all duration-300 ease-in-out`}
-  >
-    <h3 className="text-xl font-bold text-white">{casinos[3].name}</h3>
-    <p className="mt-2 text-3xl font-bold text-white">{casinos[3].bonuses[0]}</p>
-    <p className="mt-2 text-gray-200">{casinos[3].bonuses[1]}</p>
-    <div className="flex justify-between items-center mt-4">
-      <button onClick={() => togglePopup(casinos[3])} className="text-gray-200">En savoir plus</button>
-      
-      {/* Lien vers le casino pour "Réclamer" */}
-      <a href={casinos[3].url} target="_blank" rel="noopener noreferrer">
-        <button className="px-4 py-2 bg-[#F7971D] text-black rounded-lg">
-          Réclamer
-        </button>
-      </a>
-    </div>
-  </div>
-          {/* Two Emplacements libres */}
-          <div className="bg-gray-500 p-6 rounded-lg flex items-center justify-center">
-            <h3 className="text-xl font-bold text-gray-300">Emplacement libre</h3>
-          </div>
+          ))}
         </div>
       </main>
             {/* Discord Section */}
@@ -273,8 +214,9 @@ export default function Home() {
 
       {/* Footer */}
       {/* Footer */}
-<footer className="bg-[#1b1b1b] py-8 px-8 mt-12 relative">
+      <footer className="bg-[#1b1b1b] py-8 px-8 mt-12 relative">
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {/* Section Suivez-nous */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Suivez-nous sur</h3>
       <div className="flex space-x-4">
@@ -282,20 +224,24 @@ export default function Home() {
           <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
         </a>
         <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-          <Image 
-            src="/dlive.png" 
-            alt="DLive" 
+          <Image
+            src="/dlive.png"
+            alt="DLive"
             width={30}
-      height={18}
-      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
-    
+            height={18}
+            className="rounded-lg shadow-lg"
           />
         </a>
         <a href="https://www.instagram.com/LesZ_ours" className="text-[#F7971D] hover:text-white">
           <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
         </a>
+        <a href="https://x.com/LeszOurs" className="text-[#F7971D] hover:text-white">
+          <FontAwesomeIcon icon={faTimes} className="text-3xl" /> {/* Icône X */}
+        </a>
       </div>
     </div>
+
+    {/* Section Légal */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Légal</h3>
       <div className="flex flex-col space-y-2">
@@ -303,6 +249,8 @@ export default function Home() {
         <a href="/confidentialite" className="text-gray-400 hover:text-white">Politique de Confidentialité</a>
       </div>
     </div>
+
+    {/* Section Paramètres */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Paramètres</h3>
       <div className="flex flex-col space-y-2">
@@ -311,6 +259,37 @@ export default function Home() {
       </div>
     </div>
   </div>
+
+  {/* Section Support */}
+  <div className="mt-8">
+    <h3 className="text-lg font-bold text-white mb-4">Support</h3>
+    <p className="text-gray-400">
+      Pour toute assistance, contactez-nous à :
+      <a href="mailto:lesz_ours@outlook.fr" className="text-[#F7971D] hover:text-yellow-400 ml-1">
+        lesz_ours@outlook.fr
+      </a>
+    </p>
+  </div>
+
+  {/* Texte de Responsabilité */}
+  <div className="mt-8">
+    <p className="text-[#FFFFFF] text-sm leading-6">
+      CasinoHub n'est en aucun cas responsable des pertes dues au jeu ou à toute autre activité sur
+      les casinos liés aux offres de bonus. Le joueur est responsable du montant qu'il peut jouer. Ne
+      jouez pas de l'argent que vous ne pouvez pas vous permettre de perdre. Ne considérez pas le jeu
+      comme un moyen de gagner de l'argent. Nous vous recommandons de ne pas jouer lorsque vous êtes
+      de mauvaise humeur. Les joueurs sont tenus de vérifier les lois sur les jeux d'argent en
+      vigueur dans leur pays ou leur juridiction avant de jouer de l'argent sur un site de jeux
+      d'argent en ligne. Si vous avez besoin d'aide ou de soutien, visitez le site
+      <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" className="text-white underline ml-1">
+        www.begambleaware.org
+      </a>
+      ou appelez le
+      <span className="text-white ml-1">0808 8020 133</span> (EN).
+    </p>
+  </div>
+
+  {/* Droits réservés */}
   <div className="text-center text-gray-400 mt-8">
     &copy; 2024 CasinoHub. Tous droits réservés.
   </div>
@@ -318,8 +297,9 @@ export default function Home() {
 
 
 
+
       {/* Pop-up */}
-{isPopupOpen && (
+      {isPopupOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
     <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-2xl w-full relative text-center">
       <button
@@ -333,8 +313,9 @@ export default function Home() {
       <Image
         src={popupContent.logo}
         alt={`${popupContent.name} Logo`}
+        width={200} // Spécifiez la largeur explicite
+        height={200} // Spécifiez la hauteur explicite
         className="mx-auto mb-4"
-        style={{ width: '200px', height: 'auto' }} // Largeur fixée, hauteur automatique
       />
 
       {/* Titre */}
@@ -344,19 +325,27 @@ export default function Home() {
       <p className="text-gray-300 mb-4 whitespace-pre-line">{popupContent.description}</p>
 
       {/* Liste des détails */}
-      <ul className="text-gray-300 mb-4 text-left list-disc list-inside">
-        {popupContent.details && popupContent.details.map((detail, index) => (
-          <li key={index} className="mb-1">{detail}</li>
-        ))}
-      </ul>
+      {popupContent.details && (
+        <>
+          <ul className="text-gray-300 mb-4 text-left list-disc list-inside">
+            {popupContent.details.map((detail, index) => (
+              <li key={index} className="mb-1">{detail}</li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {/* Méthodes de paiement */}
-      <h4 className="text-lg font-bold text-white mb-4">Méthodes de paiement</h4>
-      <ul className="text-gray-300 mb-6 text-left">
-        {popupContent.paymentMethods && popupContent.paymentMethods.map((method, index) => (
-          <li key={index}>{method}</li>
-        ))}
-      </ul>
+      {popupContent.paymentMethods && (
+        <>
+          <h4 className="text-lg font-bold text-white mb-4">Méthodes de paiement</h4>
+          <ul className="text-gray-300 mb-6 text-left">
+            {popupContent.paymentMethods.map((method, index) => (
+              <li key={index}>{method}</li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {/* Bouton Réclamer */}
       <a href={popupContent.url} target="_blank" rel="noopener noreferrer">

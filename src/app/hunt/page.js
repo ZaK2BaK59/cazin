@@ -1,100 +1,104 @@
 "use client";
 
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSignInAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import Image from 'next/image';
-
+import Image from "next/image";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle, faSignInAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(faYoutube, faInstagram);
 
 export default function Hunt() {
-  // State to hold all entries for the bonus hunt
   const [machines, setMachines] = useState([]);
-  const [startAmount, setStartAmount] = useState(0); // Initial starting amount
+  const [startAmount, setStartAmount] = useState(''); // Input pour la somme
+  const [validatedStartAmount, setValidatedStartAmount] = useState(null); // Somme validée
   const [machineName, setMachineName] = useState('');
   const [provider, setProvider] = useState('');
-  const [betAmount, setBetAmount] = useState(0);
-  const [winAmount, setWinAmount] = useState(0);
-  const [editingIndex, setEditingIndex] = useState(null); // To track which machine's win is being edited
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [betAmount, setBetAmount] = useState('');
+  const [winAmount, setWinAmount] = useState('');
+  const [editingIndex, setEditingIndex] = useState(null);
 
-
-  // Function to add a new machine (without the win amount)
+  // Ajouter une machine
   const addMachine = () => {
+    if (!machineName || !provider || !betAmount) return;
     setMachines([
       ...machines,
-      { machineName, provider, betAmount, winAmount: null, multiplier: null },
+      { machineName, provider, betAmount: parseFloat(betAmount), winAmount: null, multiplier: null },
     ]);
-    // Reset form fields
     setMachineName('');
     setProvider('');
-    setBetAmount(0);
+    setBetAmount('');
   };
 
-  // Function to update the win and calculate the multiplier for a specific machine
+  // Ajouter le gain pour une machine
   const addWinAmount = (index) => {
     const updatedMachines = [...machines];
-    updatedMachines[index].winAmount = winAmount;
-    updatedMachines[index].multiplier = winAmount / updatedMachines[index].betAmount; // Calculate multiplier
+    updatedMachines[index].winAmount = parseFloat(winAmount);
+    updatedMachines[index].multiplier = parseFloat(winAmount) / updatedMachines[index].betAmount;
     setMachines(updatedMachines);
-    setEditingIndex(null); // Close the editing mode
-    setWinAmount(0); // Reset win amount
+    setEditingIndex(null);
+    setWinAmount('');
   };
 
-  // Total bets and bonuses
+  // Supprimer une machine
+  const removeMachine = (index) => {
+    setMachines(machines.filter((_, i) => i !== index));
+  };
+
+  // Vider le tableau des machines
+  const clearMachines = () => {
+    setMachines([]);
+  };
+
+  // Valider la somme de départ
+  const validateStartAmount = () => {
+    if (!startAmount) return;
+    setValidatedStartAmount(parseFloat(startAmount));
+    setStartAmount('');
+  };
+
+  // Réinitialiser la somme de départ
+  const resetStartAmount = () => {
+    setValidatedStartAmount(null);
+  };
+
   const totalBets = machines.reduce((acc, machine) => acc + machine.betAmount, 0);
   const totalBonuses = machines.length;
   const totalGain = machines.reduce((acc, machine) => acc + (machine.winAmount || 0), 0);
-  const netGain = totalGain - startAmount;
-  const averageMultiplier = machines.reduce((acc, machine) => acc + (machine.multiplier || 0), 0) / totalBonuses || 0;
-  const breakEvenMultiplier = totalBets ? startAmount / totalBets : 0;
+  const netGain = totalGain - (validatedStartAmount || 0);
+  const averageMultiplier =
+    machines.reduce((acc, machine) => acc + (machine.multiplier || 0), 0) / totalBonuses || 0;
+  const breakEvenMultiplier = totalBets ? (validatedStartAmount || 0) / totalBets : 0;
 
-  // Function to determine the color class based on the multiplier
   const getColorClass = (multiplier) => {
     if (multiplier >= 100) return 'bg-green-500';
     if (multiplier >= 51 && multiplier <= 99) return 'bg-orange-500';
     if (multiplier > 0 && multiplier < 51) return 'bg-red-500';
-    return 'bg-gray-500'; // Default if multiplier is not set
+    return 'bg-gray-500';
   };
 
   return (
     <div className="bg-black min-h-screen text-white flex flex-col justify-between">
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 bg-[#1b1b1b]">
-        {/* Left Section - Hamburger Menu */}
-        <div className="flex items-center space-x-4">
-          <button
-            className="text-[#F7971D] text-2xl cursor-pointer"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            &#9776; {/* Hamburger Icon */}
-          </button>
-          {isMenuOpen && (
-            <nav className="absolute top-16 left-0 bg-[#1b1b1b] p-4 z-50 shadow-lg">
-              <ul className="space-y-4 text-white">
-                <li className="hover:text-yellow-400"><a href="/blackjack">Blackjack</a></li>
-                <li className="hover:text-yellow-400"><a href="/hunt">Hunt</a></li>
-              </ul>
-            </nav>
-          )}
+        <nav className="flex items-center space-x-6">
+        <a href="/" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Accueil
+          </a>
+          <a href="/blackjack" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Blackjack
+          </a>
+          <a href="/hunt" className="text-[#F7971D] text-lg font-bold hover:text-yellow-400">
+            Hunt
+          </a>
+        </nav>
+        <div className="flex-grow flex justify-center">
+          <a href="/" className="flex items-center space-x-2">
+            <span className="text-white text-3xl font-bold">Casino</span>
+            <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">Hub</div>
+          </a>
         </div>
-
-        {/* Center Section - Logo */}
-        {/* Center Section - Logo */}
-<div className="flex-grow flex justify-center">
-  <a href="/" className="flex items-center space-x-2">
-    <span className="text-white text-3xl font-bold">Casino</span>
-    <div className="bg-[#F7971D] text-black text-3xl font-bold px-2 rounded">
-      Hub
-    </div>
-  </a>
-</div>
-
-
-        {/* Right Section - Profile Icons */}
         <div className="flex items-center space-x-4">
           <a href="/login" className="text-[#F7971D]">
             <FontAwesomeIcon icon={faUserCircle} className="text-3xl" />
@@ -111,13 +115,33 @@ export default function Hunt() {
 
         {/* Start Amount */}
         <div className="mb-6">
-          <label className="block mb-2 text-xl">Montant de départ (ex. 20000€):</label>
-          <input
-            type="number"
-            value={startAmount}
-            onChange={(e) => setStartAmount(parseFloat(e.target.value))}
-            className="px-4 py-2 bg-gray-800 text-white rounded-lg w-full"
-          />
+          <label className="block mb-2 text-xl">Montant de départ :</label>
+          {validatedStartAmount === null ? (
+            <>
+              <input
+                type="number"
+                value={startAmount}
+                onChange={(e) => setStartAmount(e.target.value)}
+                className="px-4 py-2 bg-gray-800 text-white rounded-lg w-full"
+              />
+              <button
+                onClick={validateStartAmount}
+                className="mt-4 px-4 py-2 bg-[#F7971D] text-black rounded-lg"
+              >
+                Valider
+              </button>
+            </>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <span className="text-2xl">{validatedStartAmount} €</span>
+              <button
+                onClick={resetStartAmount}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg"
+              >
+                Réinitialiser
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Form to add a machine */}
@@ -147,7 +171,7 @@ export default function Hunt() {
               <input
                 type="number"
                 value={betAmount}
-                onChange={(e) => setBetAmount(parseFloat(e.target.value))}
+                onChange={(e) => setBetAmount(e.target.value)}
                 className="px-4 py-2 bg-gray-800 text-white rounded-lg w-full"
               />
             </div>
@@ -170,6 +194,7 @@ export default function Hunt() {
               <th className="text-right px-4 py-2">Mise (€)</th>
               <th className="text-right px-4 py-2">Gain (€)</th>
               <th className="text-right px-4 py-2">Multiplicateur</th>
+              <th className="text-center px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -187,16 +212,22 @@ export default function Hunt() {
                         <input
                           type="number"
                           value={winAmount}
-                          onChange={(e) => setWinAmount(parseFloat(e.target.value))}
+                          onChange={(e) => setWinAmount(e.target.value)}
                           className="px-2 py-1 bg-gray-800 text-white rounded"
                         />
                       ) : (
-                        <button onClick={() => setEditingIndex(index)} className="text-yellow-400">
+                        <button
+                          onClick={() => setEditingIndex(index)}
+                          className="text-yellow-400"
+                        >
                           Ajouter gain
                         </button>
                       )}
                       {editingIndex === index && (
-                        <button onClick={() => addWinAmount(index)} className="ml-2 text-green-500">
+                        <button
+                          onClick={() => addWinAmount(index)}
+                          className="ml-2 text-green-500"
+                        >
                           Confirmer
                         </button>
                       )}
@@ -204,45 +235,64 @@ export default function Hunt() {
                   )}
                 </td>
                 <td className="px-4 py-2 text-right">
-                  {machine.multiplier !== null ? machine.multiplier.toFixed(2) : 'N/A'}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  {machine.multiplier !== null ? machine.multiplier.toFixed(2) : 'N/A'}
+</td>
+<td className="px-4 py-2 text-center">
+  <button
+    onClick={() => removeMachine(index)}
+    className="px-2 py-1 bg-red-500 text-white rounded-lg"
+  >
+    Supprimer
+  </button>
+</td>
+</tr>
+))}
+</tbody>
+</table>
 
-        {/* Bonus Hunt Stats */}
-        <div className="grid grid-cols-2 gap-4 mt-8">
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Total des machines ouvertes</h4>
-            <p className="text-2xl">{totalBonuses}</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Total des mises</h4>
-            <p className="text-2xl">{totalBets.toFixed(2)} €</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Gain brut</h4>
-            <p className="text-2xl">{totalGain.toFixed(2)} €</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Gain net</h4>
-            <p className="text-2xl">{netGain.toFixed(2)} €</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Multiplicateur moyen</h4>
-            <p className="text-2xl">{averageMultiplier.toFixed(2)}</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h4 className="text-xl font-bold">Break-even (multiplicateur)</h4>
-            <p className="text-2xl">{breakEvenMultiplier.toFixed(2)}</p>
-          </div>
-        </div>
-      </main>
+{/* Bouton pour vider le tableau */}
+<div className="flex justify-end mt-4">
+  <button
+    onClick={clearMachines}
+    className="px-4 py-2 bg-red-500 text-white rounded-lg"
+  >
+    Vider le tableau
+  </button>
+</div>
 
-      {/* Footer */}
-      <footer className="bg-[#1b1b1b] py-8 px-8 mt-12 relative">
+{/* Bonus Hunt Stats */}
+<div className="grid grid-cols-2 gap-4 mt-8">
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Total des machines ouvertes</h4>
+    <p className="text-2xl">{totalBonuses}</p>
+  </div>
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Total des mises</h4>
+    <p className="text-2xl">{totalBets.toFixed(2)} €</p>
+  </div>
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Gain brut</h4>
+    <p className="text-2xl">{totalGain.toFixed(2)} €</p>
+  </div>
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Gain net</h4>
+    <p className="text-2xl">{netGain.toFixed(2)} €</p>
+  </div>
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Multiplicateur moyen</h4>
+    <p className="text-2xl">{averageMultiplier.toFixed(2)}</p>
+  </div>
+  <div className="bg-gray-800 p-4 rounded-lg">
+    <h4 className="text-xl font-bold">Break-even (multiplicateur)</h4>
+    <p className="text-2xl">{breakEvenMultiplier.toFixed(2)}</p>
+  </div>
+</div>
+</main>
+
+{/* Footer */}
+<footer className="bg-[#1b1b1b] py-8 px-8 mt-12 relative">
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {/* Section Suivez-nous */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Suivez-nous sur</h3>
       <div className="flex space-x-4">
@@ -250,20 +300,24 @@ export default function Hunt() {
           <FontAwesomeIcon icon={faYoutube} className="text-3xl" />
         </a>
         <a href="https://dlive.tv/LesZ_ours" className="hover:text-white">
-          <Image 
-            src="/dlive.png" 
-            alt="DLive" 
+          <Image
+            src="/dlive.png"
+            alt="DLive"
             width={30}
-      height={18}
-      className="rounded-lg transform perspective-1000 rotate-6 shadow-lg"
-    
+            height={18}
+            className="rounded-lg shadow-lg"
           />
         </a>
         <a href="https://www.instagram.com/LesZ_ours" className="text-[#F7971D] hover:text-white">
           <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
         </a>
+        <a href="https://x.com/LeszOurs" className="text-[#F7971D] hover:text-white">
+          <FontAwesomeIcon icon={faTimes} className="text-3xl" /> {/* Icône X */}
+        </a>
       </div>
     </div>
+
+    {/* Section Légal */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Légal</h3>
       <div className="flex flex-col space-y-2">
@@ -271,6 +325,8 @@ export default function Hunt() {
         <a href="/confidentialite" className="text-gray-400 hover:text-white">Politique de Confidentialité</a>
       </div>
     </div>
+
+    {/* Section Paramètres */}
     <div>
       <h3 className="text-lg font-bold text-white mb-4">Paramètres</h3>
       <div className="flex flex-col space-y-2">
@@ -279,10 +335,42 @@ export default function Hunt() {
       </div>
     </div>
   </div>
+
+  {/* Section Support */}
+  <div className="mt-8">
+    <h3 className="text-lg font-bold text-white mb-4">Support</h3>
+    <p className="text-gray-400">
+      Pour toute assistance, contactez-nous à :
+      <a href="mailto:lesz_ours@outlook.fr" className="text-[#F7971D] hover:text-yellow-400 ml-1">
+        lesz_ours@outlook.fr
+      </a>
+    </p>
+  </div>
+
+  {/* Texte de Responsabilité */}
+  <div className="mt-8">
+    <p className="text-[#FFFFFF] text-sm leading-6">
+      CasinoHub n'est en aucun cas responsable des pertes dues au jeu ou à toute autre activité sur
+      les casinos liés aux offres de bonus. Le joueur est responsable du montant qu'il peut jouer. Ne
+      jouez pas de l'argent que vous ne pouvez pas vous permettre de perdre. Ne considérez pas le jeu
+      comme un moyen de gagner de l'argent. Nous vous recommandons de ne pas jouer lorsque vous êtes
+      de mauvaise humeur. Les joueurs sont tenus de vérifier les lois sur les jeux d'argent en
+      vigueur dans leur pays ou leur juridiction avant de jouer de l'argent sur un site de jeux
+      d'argent en ligne. Si vous avez besoin d'aide ou de soutien, visitez le site
+      <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" className="text-white underline ml-1">
+        www.begambleaware.org
+      </a>
+      ou appelez le
+      <span className="text-white ml-1">0808 8020 133</span> (EN).
+    </p>
+  </div>
+
+  {/* Droits réservés */}
   <div className="text-center text-gray-400 mt-8">
     &copy; 2024 CasinoHub. Tous droits réservés.
   </div>
 </footer>
-    </div>
-  );
+</div>
+);
 }
+
