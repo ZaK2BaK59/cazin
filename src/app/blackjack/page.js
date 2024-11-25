@@ -34,7 +34,6 @@ export default function Blackjack() {
     ["9", "T", "D", "D", "D", "D", "T", "T", "T", "T", "T"],
     ["8", "T", "T", "T", "T", "T", "T", "T", "T", "T", "T"],
     ["7", "T", "T", "T", "T", "T", "T", "T", "T", "T", "T"],
-    ["", "2", "3", "4", "5", "6", "7", "8", "9", "10", "A"],
     ["6", "T", "T", "T", "T", "T", "T", "T", "T", "T", "T"],
     ["5", "T", "T", "T", "T", "T", "T", "T", "T", "T", "T"],
     ["4", "T", "T", "T", "T", "T", "T", "T", "T", "T", "T"],
@@ -52,8 +51,6 @@ export default function Blackjack() {
     ["2/2", "P", "P", "P", "P", "P", "P", "T", "T", "T", "T"],
   ];
 
-  const firstHalf = tableData.slice(0, tableData.length / 1.9);
-  const secondHalf = tableData.slice(tableData.length / 2);
 
   const getCellColor = (value) => {
     switch (value) {
@@ -73,13 +70,13 @@ export default function Blackjack() {
   };
 
   const renderTable = (data) => (
-    <table className="border-collapse border border-gray-700 text-center text-white text-xs">
+    <table className="border-collapse border border-gray-700 text-center text-white text-xs w-full max-w-[900px]">
       <thead>
         <tr>
           {data[0].map((cell, index) => (
             <th
               key={index}
-              className="border border-gray-700 px-2 py-1 bg-[#F7971D] text-black"
+              className="border border-gray-700 px-6 py-2 bg-[#F7971D] text-black"
             >
               {cell}
             </th>
@@ -92,7 +89,7 @@ export default function Blackjack() {
             {row.map((cell, cellIndex) => (
               <td
                 key={cellIndex}
-                className={`border border-gray-700 px-2 py-1 ${
+                className={`border border-gray-700 px-6 py-2 ${
                   cellIndex === 0 ? "bg-[#F7971D] text-black" : getCellColor(cell)
                 }`}
               >
@@ -104,6 +101,7 @@ export default function Blackjack() {
       </tbody>
     </table>
   );
+  
 
   return (
     <div className="bg-black min-h-screen text-white flex flex-col justify-between">
@@ -183,16 +181,19 @@ export default function Blackjack() {
       </nav>
     </header>
 
-      <main className="px-8 py-12 text-center">
-        <h2 className="text-4xl font-bold mb-8">Stratégie de Blackjack</h2>
-        <p className="text-gray-400 text-lg mb-8">
-          Consultez notre tableau de stratégie pour maximiser vos chances de succès au Blackjack.
-        </p>
-        <div className="flex flex-col lg:flex-row justify-center gap-4">
-          <div>{renderTable(firstHalf)}</div>
-          <div>{renderTable(secondHalf)}</div>
-        </div>
-      </main>
+    <main className="px-8 py-12 text-center">
+  <h2 className="text-4xl font-bold mb-8">Stratégie de Blackjack</h2>
+  <p className="text-gray-400 text-lg mb-8">
+    Consultez notre tableau de stratégie pour maximiser vos chances de succès au Blackjack.
+  </p>
+  <div className="flex justify-center">
+    <div className="overflow-x-auto">
+      {renderTable(tableData)}
+    </div>
+  </div>
+</main>
+
+
 
 
 
