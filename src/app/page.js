@@ -87,13 +87,13 @@ export default function Home() {
       url: "https://bit.ly/4d0Wfmy",
     },
     {
-      name: "SpinRollz",
-      logo: "/rollz.png",
+      name: "Twin",
+      logo: "/twist.png",
       bonuses: ["100% WAGER x35", "Max bet 5€"],
       description: `- Wager x35\n- Mise maximale : 5€\n- Achat de bonus interdit\n- VPN autorisé\n- Dépôt en cryptomonnaies et cartes bancaires\n- Dépôt minimum : 20€\n- Dépôt maximum : 500€`,
       paymentMethods: ["Cryptomonnaies", "Carte bancaire"],
       color: "from-[#4A4A77] via-[#2C2C5C] to-[#1E1E47]", // Couleurs inspirées de SpinRollz
-      url: "https://track.affilirise.com/visit/?bta=656232&nci=5523&utm_campaign=LesZ_ours",
+      url: "https://c1li7tt5ck.com/?serial=45285&creative_id=548&anid=",
     },
   ];
   
@@ -393,16 +393,20 @@ export default function Home() {
       )}
 
       {/* Méthodes de paiement */}
-      {popupContent.paymentMethods && (
-        <>
-          <h4 className="text-lg font-bold text-white mb-4">Méthodes de paiement</h4>
-          <ul className="text-gray-300 mb-6 text-left">
-            {popupContent.paymentMethods.map((method, index) => (
-              <li key={index}>{method}</li>
-            ))}
-          </ul>
-        </>
-      )}
+      {/* Méthodes de paiement */}
+{popupContent.paymentMethods && (
+  <>
+    <h4 className="text-lg font-bold text-white mb-4">Méthodes de paiement</h4>
+    <div className="flex flex-col items-center">
+      <ul className="text-gray-300 mb-6 text-left list-none">
+        {popupContent.paymentMethods.map((method, index) => (
+          <li key={index} className="mb-1">{method}</li>
+        ))}
+      </ul>
+    </div>
+  </>
+)}
+
 
       {/* Bouton Réclamer */}
       <a href={popupContent.url} target="_blank" rel="noopener noreferrer">
