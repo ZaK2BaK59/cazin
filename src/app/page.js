@@ -10,6 +10,15 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faYoutube, faInstagram);
 
 export default function Home() {
+  if (process.env.NEXT_PUBLIC_MAINTENANCE === "true") {
+    return (
+      <div className="bg-black min-h-screen flex items-center justify-center text-white">
+        <h1 className="text-4xl font-bold">Site en maintenance</h1>
+        <p className="mt-4">Nous serons de retour bientôt. Merci de votre patience.</p>
+      </div>
+    );
+  }
+  
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({});
 
