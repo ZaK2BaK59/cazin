@@ -11,6 +11,9 @@ library.add(faYoutube, faInstagram);
 
 export default function Home() {
     const isMaintenanceMode = true; // Passez à false pour désactiver le mode maintenance
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [popupContent, setPopupContent] = useState({});
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
   
     if (isMaintenanceMode) {
       return (
@@ -22,8 +25,6 @@ export default function Home() {
     }
   
   
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupContent, setPopupContent] = useState({});
 
   // Function to toggle the popup and pass specific content
   const togglePopup = (casino) => {
@@ -33,7 +34,7 @@ export default function Home() {
     setIsPopupOpen(!isPopupOpen);
   };
   
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   // Fonction pour toggler l'état du menu
   const toggleMenu = () => {
