@@ -21,11 +21,6 @@ export default function Home() {
       );
     }
   
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [popupContent, setPopupContent] = useState({});
-    // Reste du code...
-  }
-  
   
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState({});
