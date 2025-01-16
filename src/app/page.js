@@ -10,7 +10,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faYoutube, faInstagram);
 
 export default function Home() {
-    const isMaintenanceMode = true; // Passez à false pour désactiver le mode maintenance
+    const isMaintenanceMode = false; // Passez à false pour désactiver le mode maintenance
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [popupContent, setPopupContent] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
